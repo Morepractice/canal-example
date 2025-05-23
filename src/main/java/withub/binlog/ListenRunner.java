@@ -3,8 +3,6 @@ package withub.binlog;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
-
 /**
  * @file_name: ListenRunner
  * @description: 启动binlog

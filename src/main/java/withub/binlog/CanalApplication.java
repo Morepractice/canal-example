@@ -5,11 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
- * @file_name: ${NAME}
- * @description: ${description}
- * @author: siHua
+ * @author: si
  * @create: 2025-05-22 17:10:39
- * @version: ${VERSION}
+ * @version: 1
  **/
 @EnableAsync
 @SpringBootApplication(scanBasePackages = {"withub.binlog"})

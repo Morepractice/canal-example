@@ -5,10 +5,10 @@ import com.alibaba.otter.canal.client.CanalConnectors;
 import com.alibaba.otter.canal.protocol.CanalEntry;
 import com.alibaba.otter.canal.protocol.Message;
 import org.springframework.beans.factory.DisposableBean;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
+import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -22,7 +22,7 @@ import java.util.List;
 @Component
 public class CanalListener implements DisposableBean {
     private final CanalConnector connector;
-    private FileWriter writer;
+    private BufferedWriter writer;
     private String currentFileName;
 
     public CanalListener() {
@@ -43,11 +43,14 @@ public class CanalListener implements DisposableBean {
             }
 
             try{
+                BufferedWriter writer = getWriter();
                 for (CanalEntry.Entry entry : entries) {
-                    getWriter().write(entry.toString() + "\n");
+                    writer.write(entry.toString());
+                    writer.newLine();
                 }
+                writer.flush();
             } catch (IOException e) {
-                System.err.println("写入binglog异常,binlog信息");
+                System.err.println("写入binglog异常,binlog信息:\n");
                 for (CanalEntry.Entry entry : entries) {
                     System.err.println(entry.toString() + "\n");
                 }
@@ -58,7 +61,7 @@ public class CanalListener implements DisposableBean {
         }
     }
 
-    private FileWriter getWriter() throws IOException {
+    private BufferedWriter getWriter() throws IOException {
         String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         String fileName = "binlog-" + date + ".sql";
 
@@ -66,7 +69,7 @@ public class CanalListener implements DisposableBean {
             if (writer != null) {
                 writer.close();
             }
-            writer = new FileWriter(fileName, true);
+            writer = new BufferedWriter(new FileWriter(fileName, true));
             currentFileName = fileName;
         }
         return writer;
@@ -79,7 +82,7 @@ public class CanalListener implements DisposableBean {
                 writer.close();
             }
         } catch (IOException e) {
-            System.err.println("关闭writer异常");
+            System.err.println("关闭writer异常\n");
             e.printStackTrace();
         }
     }
