@@ -1,6 +1,6 @@
 # canal1.1.8使用实践
 
-## 数据库配置
+## 数据库配置（mysql8.*）
 - 新增用户（canal/123456）：create user 'canal'@'%' identified by '123456';
 - 赋予用户（canal）权限：GRANT SELECT, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'canal'@'%';
   FLUSH PRIVILEGES;
