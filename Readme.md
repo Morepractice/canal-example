@@ -31,7 +31,7 @@
   
 ## 启动canal
 - windows环境：启动bin/startup.bat
-- 可能有报错，根据日志删除 -Dlogback.configurationFile="" -XX:PermSize=128m
+- 可能有报错，根据错误日志，需删除startup.bat中 -Dlogback.configurationFile="" -XX:PermSize=128m
 
 ## 启动java监听程序
 
