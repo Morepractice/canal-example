@@ -1,4 +1,4 @@
-package withub.binlog;
+package com.binlog;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

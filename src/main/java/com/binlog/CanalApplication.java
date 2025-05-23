@@ -1,4 +1,4 @@
-package withub.binlog;
+package com.binlog;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,7 +10,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
  * @version: 1
  **/
 @EnableAsync
-@SpringBootApplication(scanBasePackages = {"withub.binlog"})
+@SpringBootApplication(scanBasePackages = {"com.binlog"})
 public class CanalApplication {
     public static void main(String[] args) {
         SpringApplication.run(CanalApplication.class, args);
